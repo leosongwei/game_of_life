@@ -1,6 +1,8 @@
 README
 ------
 
+Conway's Game of Life in ncurses on Steel Bank Common Lisp (SBCL).
+
 This game follow these rules:
 
 1. Any live cell with fewer than two live neighbours dies, as if caused by under-population.
