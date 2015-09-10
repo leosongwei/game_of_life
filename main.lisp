@@ -1,7 +1,6 @@
-(ql:quickload 'cl-ncurses)
-
 (defpackage game-of-life
-  (:use cl cl-user cl-ncurses))
+  (:use cl cl-user cl-ncurses)
+  (:export :top))
 
 (in-package game-of-life)
 
@@ -114,3 +113,23 @@
                     1 0))))))
     (setf *array-cons*
           (cons d a))))
+
+(defun keystroke ()
+  (loop
+    (let ((key (code-char (getch))))
+      (cond ((eq key #\q)
+             (progn
+               (clear)
+               (endwin)
+               (sb-ext:exit)))
+            ((eq key #\r)
+             (init-game))))))
+
+(defun top ()
+  (init-display)
+  (init-game)
+  (sb-thread:make-thread #'keystroke)
+  (loop
+    (sleep 0.1)
+    (calculate-frame)
+    (display-car)))
