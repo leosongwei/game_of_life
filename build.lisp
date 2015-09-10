@@ -1,7 +1,9 @@
+(load "asdf.lisp")
+
 (defvar cl-ncurses-path
-  (car (directory "./cl-ncurses_0.1.4/")))
+  (car (directory "./lisplibs/cl-ncurses_0.1.4/")))
 (defvar uffi-path
-  (car (directory "./uffi-20130813-git/")))
+  (car (directory "./lisplibs/uffi-20130813-git/")))
 
 (setf asdf/find-system:*central-registry* nil)
 (push cl-ncurses-path asdf/find-system:*central-registry*)
