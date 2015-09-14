@@ -22,16 +22,6 @@
             *screen-height*
             *screen-width*))
 
-(defun init-game ()
-  (setf *width* *screen-width*)
-  (setf *height* *screen-height*)
-
-  (setf *array-cons*
-        (cons (make-array (list *height* *width*))
-              (make-array (list *height* *width*))))
-  (init-random 3)
-  t)
-
 (defun init-random (rate)
   "rate is a number between 0-10."
   (let ((h (array-dimension (car *array-cons*) 0))
@@ -41,6 +31,16 @@
         (if (< (random 10) rate)
           (setf (aref (car *array-cons*) hi wi) 1)
           (setf (aref (car *array-cons*) hi wi) 0))))))
+
+(defun init-game ()
+  (setf *width* *screen-width*)
+  (setf *height* *screen-height*)
+
+  (setf *array-cons*
+        (cons (make-array (list *height* *width*))
+              (make-array (list *height* *width*))))
+  (init-random 3)
+  t)
 
 (defun put-dark (r c)
   (attroff a_reverse)
