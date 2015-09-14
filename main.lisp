@@ -111,8 +111,8 @@
             (setf (aref d r c)
                   (if (= 3 (calculate-cell r c))
                     1 0))))))
-    (setf *array-cons*
-          (cons d a))))
+    (setf (car *array-cons*) d)
+    (setf (cdr *array-cons*) a)))
 
 (defun keystroke ()
   (loop
