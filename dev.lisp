@@ -1,14 +1,3 @@
-(load "asdf.lisp")
+(load "load.lisp")
 
-(defvar cl-ncurses-path
-  (car (directory "./lisplibs/cl-ncurses_0.1.4/")))
-(defvar uffi-path
-  (car (directory "./lisplibs/uffi-20130813-git/")))
-
-(setf asdf/find-system:*central-registry* nil)
-(push cl-ncurses-path asdf/find-system:*central-registry*)
-(push uffi-path asdf/find-system:*central-registry*)
-
-(require :cl-ncurses)
-(load "main.lisp")
-
+(load "~/quicklisp/dists/quicklisp/software/slime-2.13/start-swank.lisp")
