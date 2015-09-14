@@ -42,24 +42,6 @@
   (init-random 3)
   t)
 
-(defun put-dark (r c)
-  (attroff a_reverse)
-  (mvaddch r c (char-code #\Space)))
-
-(defun put-bright (r c)
-  (attron a_reverse)
-  (mvaddch r c (char-code #\Space)))
-
-(defun display-car ()
-  (dotimes (r *height*)
-    (dotimes (c *width*)
-      (let ((cell (aref (car *array-cons*) r c)))
-        (if (= 1 cell)
-          (put-bright r c)
-          (put-dark r c)))))
-  (refresh))
-
-
 (defun access-cell-square (r c)
   (let ((y (mod r *height*))
         (x (mod c *width*)))
@@ -124,6 +106,10 @@
                (sb-ext:exit)))
             ((eq key #\r)
              (init-game))))))
+
+(defvar display-func (lambda () nil))
+(defun display-car ()
+  (funcall display-func))
 
 (defun top ()
   (init-display)
