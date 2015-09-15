@@ -2,6 +2,7 @@
 
 (in-package game-of-life)
 ;;;; -------------- Config here ---------------------
+;(setf top-func #'ncurses-top)
 (setf top-func #'gl-top)
 ;;;; ------------------------------------------------
 (in-package cl)

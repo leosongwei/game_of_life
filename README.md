@@ -20,9 +20,12 @@ Requirements
 ------------
 
 1. sbcl
-2. libncursesw (path: /lib/x86_64-linux-gnu/libncursesw.so.5.9)
+2. Ncurses: libncursesw (path: /lib/x86_64-linux-gnu/libncursesw.so.5.9)
+3. OpenGL: freeglut
 
 Build
 -----
 
 `sh build.sh`
+
+Edit `build.lisp` for choosing display mode.
