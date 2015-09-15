@@ -2,7 +2,7 @@
 
 (in-package game-of-life)
 ;;;; -------------- Config here ---------------------
-(setf display-func #'display-by-ncurses)
+(setf top-func #'ncurses-top)
 ;;;; ------------------------------------------------
 (in-package cl)
 

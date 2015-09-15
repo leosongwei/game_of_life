@@ -107,15 +107,7 @@
             ((eq key #\r)
              (init-game))))))
 
-(defvar display-func (lambda () nil))
-(defun display-car ()
-  (funcall display-func))
+(defparameter top-func (lambda () nil))
 
 (defun top ()
-  (init-display)
-  (init-game)
-  (sb-thread:make-thread #'keystroke)
-  (loop
-    (sleep 0.1)
-    (calculate-frame)
-    (display-car)))
+  (funcall top-func))

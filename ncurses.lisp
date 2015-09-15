@@ -16,3 +16,12 @@
           (put-bright r c)
           (put-dark r c)))))
   (refresh))
+
+(defun ncurses-top ()
+  (init-display)
+  (init-game)
+  (sb-thread:make-thread #'keystroke)
+  (loop
+    (sleep 0.1)
+    (calculate-frame)
+    (display-by-ncurses)))

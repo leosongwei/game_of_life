@@ -31,7 +31,7 @@
       (%gl:vertex-2i (+ left len) (+ top len))
       (%gl:vertex-2i left (+ top len)))))
 
-(defun gl-init ()
+(defun gl-top ()
   (let ((*screen-width* 125)
         (*screen-height* 125))
     (init-game))
