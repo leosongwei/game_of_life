@@ -3,6 +3,8 @@ README
 
 Conway's Game of Life in ncurses on Steel Bank Common Lisp (SBCL).
 
+2 display modes are supported: Ncurses and Opengl.
+
 This game follow these rules:
 
 1. Any live cell with fewer than two live neighbours dies, as if caused by under-population.
@@ -22,6 +24,8 @@ Requirements
 1. sbcl
 2. Ncurses: libncursesw (path: /lib/x86_64-linux-gnu/libncursesw.so.5.9)
 3. OpenGL: freeglut
+
+Sadly, you must have to satisfy all of these requirements for now(because i'm lazy).
 
 Build
 -----
