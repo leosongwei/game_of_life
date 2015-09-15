@@ -1,12 +1,10 @@
 (in-package game-of-life)
 
-
 (defclass game-window (glut:window)
   ()
   (:default-initargs
     :width 500 :height 500
     :title "life game"))
-
 
 (defmethod glut:tick ((w game-window))
   (calculate-frame)
@@ -31,11 +29,6 @@
       (%gl:vertex-2i (+ left len) (+ top len))
       (%gl:vertex-2i left (+ top len)))))
 
-(defun gl-top ()
-  (let ((*screen-width* 125)
-        (*screen-height* 125))
-    (init-game))
-
 (defmethod glut:display ((w game-window))
   (gl:clear :color-buffer)
   (gl:color 0 1 0)
@@ -47,3 +40,9 @@
           nil))))
   (glut:swap-buffers))
 
+(defun gl-top ()
+  (let ((*screen-width* 125)
+        (*screen-height* 125))
+    (init-game))
+  (glut:display-window
+    (make-instance 'game-window)))

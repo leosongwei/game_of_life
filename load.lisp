@@ -31,3 +31,4 @@
 
 (load "main.lisp")
 (load "ncurses.lisp")
+(load "gl.lisp")
