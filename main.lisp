@@ -22,16 +22,6 @@
             *screen-height*
             *screen-width*))
 
-(defun init-game ()
-  (setf *width* *screen-width*)
-  (setf *height* *screen-height*)
-
-  (setf *array-cons*
-        (cons (make-array (list *height* *width*))
-              (make-array (list *height* *width*))))
-  (init-random 3)
-  t)
-
 (defun init-random (rate)
   "rate is a number between 0-10."
   (let ((h (array-dimension (car *array-cons*) 0))
@@ -42,23 +32,15 @@
           (setf (aref (car *array-cons*) hi wi) 1)
           (setf (aref (car *array-cons*) hi wi) 0))))))
 
-(defun put-dark (r c)
-  (attroff a_reverse)
-  (mvaddch r c (char-code #\Space)))
+(defun init-game ()
+  (setf *width* *screen-width*)
+  (setf *height* *screen-height*)
 
-(defun put-bright (r c)
-  (attron a_reverse)
-  (mvaddch r c (char-code #\Space)))
-
-(defun display-car ()
-  (dotimes (r *height*)
-    (dotimes (c *width*)
-      (let ((cell (aref (car *array-cons*) r c)))
-        (if (= 1 cell)
-          (put-bright r c)
-          (put-dark r c)))))
-  (refresh))
-
+  (setf *array-cons*
+        (cons (make-array (list *height* *width*))
+              (make-array (list *height* *width*))))
+  (init-random 3)
+  t)
 
 (defun access-cell-square (r c)
   (let ((y (mod r *height*))
@@ -111,8 +93,8 @@
             (setf (aref d r c)
                   (if (= 3 (calculate-cell r c))
                     1 0))))))
-    (setf *array-cons*
-          (cons d a))))
+    (setf (car *array-cons*) d)
+    (setf (cdr *array-cons*) a)))
 
 (defun keystroke ()
   (loop
@@ -125,11 +107,7 @@
             ((eq key #\r)
              (init-game))))))
 
+(defparameter top-func (lambda () nil))
+
 (defun top ()
-  (init-display)
-  (init-game)
-  (sb-thread:make-thread #'keystroke)
-  (loop
-    (sleep 0.1)
-    (calculate-frame)
-    (display-car)))
+  (funcall top-func))
