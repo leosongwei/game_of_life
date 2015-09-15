@@ -3,7 +3,7 @@
 (defclass game-window (glut:window)
   ()
   (:default-initargs
-    :width 500 :height 500
+    :width 800 :height 400
     :title "life game"))
 
 (defmethod glut:tick ((w game-window))
@@ -17,12 +17,12 @@
   (gl:shade-model :smooth)
   (gl:matrix-mode :projection)
   (gl:load-identity)
-  (glu:ortho-2d 0 500 500 0))
+  (glu:ortho-2d 0 800 400 0))
 
 (defun draw-square (r c)
-  (let ((len 3)
-        (left (* 4 c))
-        (top (* 4 r)))
+  (let* ((len 4)
+         (left (* (1+ len) c))
+         (top (* (1+ len) r)))
     (gl:with-primitive :polygon
       (%gl:vertex-2i left top)
       (%gl:vertex-2i (+ left len) top)
@@ -41,8 +41,8 @@
   (glut:swap-buffers))
 
 (defun gl-top ()
-  (let ((*screen-width* 125)
-        (*screen-height* 125))
+  (let ((*screen-width* 160)
+        (*screen-height* 80))
     (init-game))
   (glut:display-window
     (make-instance 'game-window)))

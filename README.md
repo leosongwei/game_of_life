@@ -1,6 +1,8 @@
 README
 ------
 
+<img src="https://raw.githubusercontent.com/leosongwei/game_of_life/master/screenshot.png" />
+
 Conway's Game of Life in ncurses on Steel Bank Common Lisp (SBCL).
 
 2 display modes are supported: Ncurses and Opengl.
