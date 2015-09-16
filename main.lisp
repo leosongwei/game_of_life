@@ -1,5 +1,6 @@
 (defpackage game-of-life
-  (:use cl cl-user cl-ncurses)
+  (:use cl cl-user cl-ncurses
+        sb-thread)
   (:export :top))
 
 (in-package game-of-life)
@@ -10,6 +11,8 @@
 (defvar *screen-height* 0)
 
 (defvar *array-cons* nil)
+
+(defvar *mutex-car* (make-mutex))
 
 (defun init-display ()
   (initscr)
@@ -93,19 +96,9 @@
             (setf (aref d r c)
                   (if (= 3 (calculate-cell r c))
                     1 0))))))
-    (setf (car *array-cons*) d)
-    (setf (cdr *array-cons*) a)))
-
-(defun keystroke ()
-  (loop
-    (let ((key (code-char (getch))))
-      (cond ((eq key #\q)
-             (progn
-               (clear)
-               (endwin)
-               (sb-ext:exit)))
-            ((eq key #\r)
-             (init-game))))))
+    (with-mutex (*mutex-car*)
+      (setf (car *array-cons*) d)
+      (setf (cdr *array-cons*) a))))
 
 (defparameter top-func (lambda () nil))
 

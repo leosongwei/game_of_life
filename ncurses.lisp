@@ -1,5 +1,17 @@
 (in-package game-of-life)
 
+(defun keystroke ()
+  (loop
+    (let ((key (code-char (getch))))
+      (cond ((eq key #\q)
+             (progn
+               (clear)
+               (endwin)
+               (sb-ext:exit)))
+            ((eq key #\r)
+             (with-mutex (*mutex-car*)
+               (init-game)))))))
+
 (defun put-dark (r c)
   (attroff a_reverse)
   (mvaddch r c (char-code #\Space)))
@@ -9,12 +21,13 @@
   (mvaddch r c (char-code #\Space)))
 
 (defun display-by-ncurses ()
-  (dotimes (r *height*)
-    (dotimes (c *width*)
-      (let ((cell (aref (car *array-cons*) r c)))
-        (if (= 1 cell)
-          (put-bright r c)
-          (put-dark r c)))))
+  (with-mutex (*mutex-car*)
+    (dotimes (r *height*)
+      (dotimes (c *width*)
+        (let ((cell (aref (car *array-cons*) r c)))
+          (if (= 1 cell)
+            (put-bright r c)
+            (put-dark r c))))))
   (refresh))
 
 (defun ncurses-top ()
