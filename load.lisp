@@ -1,34 +1,32 @@
 (load "asdf.lisp")
 
-(defvar cl-ncurses-path
-  (car (directory "./lisplibs/cl-ncurses_0.1.4/")))
-(defvar uffi-path
-  (car (directory "./lisplibs/uffi-20130813-git/")))
-(defvar opengl-path
-  (car (directory "./lisplibs/cl-opengl-20150302-git/")))
-(defvar cffi-path
-  (car (directory "./lisplibs/cffi_0.15.0/")))
-(defvar alexandria-path
-  (car (directory "./lisplibs/alexandria-20150505-git/")))
-(defvar trivial-features-path
-  (car (directory "./lisplibs/trivial-features-20150113-git/")))
-(defvar babel-path
-  (car (directory "./lisplibs/babel-20150608-git/")))
-
 (setf asdf/find-system:*central-registry* nil)
-(push cl-ncurses-path asdf/find-system:*central-registry*)
-(push uffi-path asdf/find-system:*central-registry*)
-(push opengl-path asdf/find-system:*central-registry*)
-(push cffi-path asdf/find-system:*central-registry*)
-(push alexandria-path asdf/find-system:*central-registry*)
-(push trivial-features-path asdf/find-system:*central-registry*)
-(push babel-path asdf/find-system:*central-registry*)
+
+(defmacro push-asdf (path)
+  `(push (car (directory ,path)) asdf/find-system:*central-registry*))
+
+(push-asdf "./lisplibs/cl-ncurses_0.1.4/")
+(push-asdf "./lisplibs/uffi-20130813-git/")
+(push-asdf "./lisplibs/cl-opengl-20150302-git/")
+(push-asdf "./lisplibs/cffi_0.15.0/")
+(push-asdf "./lisplibs/alexandria-20150505-git/")
+(push-asdf "./lisplibs/trivial-features-20150113-git/")
+(push-asdf "./lisplibs/babel-20150608-git/")
+(push-asdf "./lisplibs/cl-sdl2-20150608-git/")
+(push-asdf "./lisplibs/cl-autowrap-20150608-git/")
+(push-asdf "./lisplibs/cl-ppcre-2.0.10/")
+(push-asdf "./lisplibs/trivial-garbage-20150113-git/")
+(push-asdf "./lisplibs/trivial-channels-20140713-git/")
+(push-asdf "./lisplibs/cl-json-20141217-git/")
+(push-asdf "./lisplibs/external-program-20150302-git/")
+(push-asdf "./lisplibs/cl-fad-0.7.3/")
+(push-asdf "./lisplibs/bordeaux-threads-0.8.3/")
+(push-asdf "./lisplibs/trivial-timeout-20130813-darcs/")
 
 (require :cl-ncurses)
 (require :cl-opengl)
-(require :cl-glu)
-(require :cl-glut)
+(require :sdl2)
 
 (load "main.lisp")
 (load "ncurses.lisp")
-(load "gl.lisp")
+(load "sdl.lisp")
