@@ -25,6 +25,7 @@
 
 (require :cl-ncurses)
 (require :cl-opengl)
+(require :cl-glu)
 (require :sdl2)
 
 (load "main.lisp")

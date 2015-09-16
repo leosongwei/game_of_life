@@ -1,5 +1,7 @@
 (defpackage game-of-life
-  (:use cl cl-user cl-ncurses
+  (:use cl cl-user
+        cl-ncurses
+        sdl2
         sb-thread)
   (:export :top))
 
